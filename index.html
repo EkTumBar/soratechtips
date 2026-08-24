@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SoraTechTips | Your Digital Partner</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome for Icons -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary-navy: #0b1a3a;
             --accent-gold: #d4af37;
-            --light-bg: #f4f7f6;
+            --light-bg: #f8f9fa;
             --white: #ffffff;
-            --text-dark: #333;
+            --text-dark: #1a1a1a;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -22,28 +24,30 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             background-color: var(--light-bg);
             color: var(--text-dark);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* --- Header & Hero Section --- */
+        /* --- Optimized Header --- */
         header {
-            background: linear-gradient(135deg, var(--primary-navy) 0%, #162a4d 100%);
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #1c2e52 100%);
             color: var(--white);
-            padding: 60px 20px;
+            padding: 4rem 1rem;
             text-align: center;
-            border-bottom: 5px solid var(--accent-gold);
-            position: relative;
+            border-bottom: 4px solid var(--accent-gold);
         }
 
         .logo-text {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 8vw, 4rem); /* Scales based on screen size */
             font-weight: 700;
-            margin-bottom: 10px;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
         }
 
         .logo-text span { color: var(--accent-gold); }
@@ -52,124 +56,200 @@
             background: var(--accent-gold);
             color: var(--primary-navy);
             display: inline-block;
-            padding: 5px 25px;
-            font-weight: 600;
+            padding: 0.3rem 1.5rem;
+            font-weight: 700;
             border-radius: 50px;
             text-transform: uppercase;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+            font-size: clamp(0.7rem, 2vw, 0.9rem);
+            margin-bottom: 1.5rem;
         }
 
-        /* --- Services Section --- */
-        .services-container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+        .hero-subtext {
+            font-size: clamp(1rem, 3vw, 1.2rem);
+            opacity: 0.9;
+            font-weight: 300;
         }
 
-        .section-title { text-align: center; margin-bottom: 40px; }
-        
-        .section-title h2 { 
-            font-size: 2.2rem; 
-            color: var(--primary-navy); 
-            position: relative; 
+        /* --- Services Container --- */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--primary-navy);
+            position: relative;
             display: inline-block;
+            padding-bottom: 5px;
         }
 
-        /* LIFTED UNDERLINE: Changed bottom from -10px to 4px */
-        /* To REMOVE the underline entirely, delete the entire section-title h2::after block below */
-        .section-title h2::after { 
-            content: ''; 
-            width: 100%; 
-            height: 2px; 
-            background: var(--accent-gold); 
-            position: absolute; 
-            bottom: 4px; 
-            left: 0; 
+        .section-header h2::after {
+            content: '';
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gold);
+            position: absolute;
+            bottom: 8px;
+            left: 0;
         }
 
+        /* --- Responsive Grid --- */
         .services-grid {
             display: grid;
+            /* Mobile: 1 col | Tablet: 2 col | PC: 3 col */
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            gap: 20px;
         }
 
         .service-card {
             background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
+            padding: 2.5rem 1.5rem;
+            border-radius: 20px;
             text-align: center;
-            transition: 0.3s;
             cursor: pointer;
-            border: 1px solid #eee;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
         }
 
         .service-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent-gold);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
         }
 
-        .service-card i { font-size: 2.5rem; color: var(--primary-navy); margin-bottom: 15px; }
-        .service-card h3 { margin-bottom: 10px; color: var(--primary-navy); }
-        .price-hint { font-size: 0.8rem; color: var(--accent-gold); font-weight: 600; text-transform: uppercase; }
+        .service-card i {
+            font-size: 3rem;
+            color: var(--primary-navy);
+            margin-bottom: 1.5rem;
+        }
 
-        /* --- Modal (Popup) Styles --- */
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-navy);
+        }
+
+        .price-btn {
+            margin-top: auto;
+            background: #f0f2f5;
+            color: var(--primary-navy);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .price-btn {
+            background: var(--accent-gold);
+            color: var(--white);
+        }
+
+        /* --- Enhanced Modal (Responsive) --- */
         .modal-overlay {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: none; 
+            inset: 0;
+            background: rgba(11, 26, 58, 0.9);
+            display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+            z-index: 2000;
+            padding: 20px;
+            backdrop-filter: blur(8px);
         }
 
         .modal-content {
             background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            width: 90%;
+            width: 100%;
             max-width: 450px;
-            text-align: center;
+            border-radius: 24px;
+            padding: 2rem;
             position: relative;
-            animation: popIn 0.3s ease-out;
-            border-top: 8px solid var(--accent-gold);
+            animation: modalSlide 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        @keyframes popIn {
-            from { transform: scale(0.8); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        @keyframes modalSlide {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        .close-modal {
+        .close-btn {
             position: absolute;
-            top: 15px; right: 20px;
-            font-size: 1.5rem;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
             cursor: pointer;
-            color: #999;
+            color: #ccc;
+            line-height: 1;
         }
 
-        .modal-icon { font-size: 3.5rem; color: var(--primary-navy); margin-bottom: 20px; }
-        .modal-title { font-size: 1.8rem; color: var(--primary-navy); margin-bottom: 15px; }
-        
-        .price-list { list-style: none; padding: 0; }
-        .price-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #eee;
+        .price-item {
             display: flex;
             justify-content: space-between;
-            font-size: 1.1rem;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
         }
-        .price-list li:last-child { border-bottom: none; }
-        .price-val { font-weight: 700; color: var(--primary-navy); }
 
-        /* --- Footer/Contact --- */
-        .contact-section { background: var(--primary-navy); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 50px; }
-        .phone-number { font-size: 2rem; color: var(--accent-gold); text-decoration: none; display: block; font-weight: 700; margin: 10px 0; }
+        .price-item:last-child { border-bottom: none; }
+        .price-label { font-weight: 500; color: #555; }
+        .price-value { font-weight: 700; color: var(--primary-navy); font-size: 1.2rem; }
 
+        /* --- Responsive Footer --- */
+        .contact-bar {
+            background: var(--primary-navy);
+            color: var(--white);
+            padding: 4rem 1.5rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .contact-bar h2 { margin-bottom: 1rem; font-size: clamp(1.5rem, 4vw, 2rem); }
+
+        .phone-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent-gold);
+            color: var(--primary-navy);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: clamp(1.1rem, 3vw, 1.5rem);
+            transition: var(--transition);
+        }
+
+        .phone-link:hover {
+            transform: scale(1.05);
+            background: var(--white);
+        }
+
+        footer {
+            background: #060e1f;
+            color: rgba(255,255,255,0.5);
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+        }
+
+        /* PC Specific adjustments */
+        @media (min-width: 1024px) {
+            .services-grid { gap: 30px; }
+            .container { padding: 5rem 2rem; }
+        }
     </style>
 </head>
 <body>
@@ -177,127 +257,146 @@
     <header>
         <div class="logo-text">Sora<span>Tech</span>Tips</div>
         <div class="tagline">Your Digital Partner</div>
-        <p>"ALL YOUR NEEDS, ONE PLACE!"</p>
+        <p class="hero-subtext">ALL YOUR NEEDS, ONE PLACE!</p>
     </header>
 
-    <section class="services-container">
-        <div class="section-title">
+    <main class="container">
+        <div class="section-header">
             <h2>OUR SERVICES</h2>
-            <p>Click on a service to see our affordable pricing</p>
+            <p style="color: #666; margin-top: 10px;">Select a service to view pricing details</p>
         </div>
-        
+
         <div class="services-grid">
-            <div class="service-card" onclick="openModal('printing')">
+            <!-- Printing -->
+            <div class="service-card" onclick="showPrices('printing')">
                 <i class="fas fa-print"></i>
                 <h3>Printing</h3>
-                <p>B&W and Color Prints</p>
-                <span class="price-hint">Click for Price</span>
+                <p>Black & White / Color</p>
+                <div class="price-btn">View Price</div>
             </div>
 
-            <div class="service-card" onclick="openModal('passphoto')">
-                <i class="fas fa-id-card"></i>
+            <!-- Passphoto -->
+            <div class="service-card" onclick="showPrices('photo')">
+                <i class="fas fa-camera"></i>
                 <h3>Passphoto</h3>
-                <p>Instant Passport & ID Photos</p>
-                <span class="price-hint">Click for Price</span>
+                <p>Instant ID Photos</p>
+                <div class="price-btn">View Price</div>
             </div>
 
-            <div class="service-card" onclick="openModal('lamination')">
-                <i class="fas fa-file-shield"></i>
+            <!-- Lamination -->
+            <div class="service-card" onclick="showPrices('lamination')">
+                <i class="fas fa-shield-halved"></i>
                 <h3>Lamination</h3>
-                <p>Protect your documents</p>
-                <span class="price-hint">Click for Price</span>
+                <p>A4 & ID Protection</p>
+                <div class="price-btn">View Price</div>
             </div>
 
-            <div class="service-card" onclick="openModal('spiral')">
-                <i class="fas fa-book"></i>
+            <!-- Spiral -->
+            <div class="service-card" onclick="showPrices('spiral')">
+                <i class="fas fa-file-lines"></i>
                 <h3>Spiral Binding</h3>
-                <p>Reports & Project Binding</p>
-                <span class="price-hint">Click for Price</span>
+                <p>Professional Binding</p>
+                <div class="price-btn">View Price</div>
             </div>
 
-            <div class="service-card" onclick="openModal('software')">
-                <i class="fas fa-laptop-code"></i>
+            <!-- Software -->
+            <div class="service-card" onclick="showPrices('software')">
+                <i class="fas fa-laptop-medical"></i>
                 <h3>Software Repair</h3>
-                <p>Installation & Troubleshooting</p>
-                <span class="price-hint">Click for Price</span>
+                <p>Repairs & Optimization</p>
+                <div class="price-btn">View Price</div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Pricing Modal -->
-    <div class="modal-overlay" id="modalOverlay">
+    <!-- Shared Responsive Modal -->
+    <div class="modal-overlay" id="priceModal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalIcon" class="modal-icon"></div>
-            <h2 id="modalTitle" class="modal-title"></h2>
-            <ul id="priceList" class="price-list"></ul>
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <div id="modalIcon" style="font-size: 3rem; color: var(--primary-navy); margin-bottom: 1rem; text-align: center;"></div>
+            <h3 id="modalTitle" style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-navy);"></h3>
+            <div id="modalPrices"></div>
         </div>
     </div>
 
-    <section class="contact-section">
-        <h2>For More Info Contact Us</h2>
-        <a href="tel:9436727264" class="phone-number">94367 27264</a>
-        <p>Thank You for Choosing SoraTechTips!</p>
+    <section class="contact-bar">
+        <h2>Ready to assist you!</h2>
+        <p style="margin-bottom: 2rem; opacity: 0.8;">Click below to call us directly</p>
+        <a href="tel:9436727264" class="phone-link">
+            <i class="fas fa-phone-alt"></i> 94367 27264
+        </a>
     </section>
 
+    <footer>
+        <p>Thank You for Choosing SoraTechTips!</p>
+        <p style="margin-top: 5px;">&copy; 2023 SoraTechTips. All Rights Reserved.</p>
+    </footer>
+
     <script>
-        const pricingData = {
+        const priceData = {
             printing: {
-                title: "Printing Services",
+                title: "Printing Prices",
                 icon: '<i class="fas fa-print"></i>',
-                prices: [
-                    { label: "Black & White (Single)", price: "₹5" },
-                    { label: "Black & White (Both Sides)", price: "₹6" },
-                    { label: "Color Printing", price: "₹10" }
+                items: [
+                    ["Black & White (Single)", "₹5"],
+                    ["Black & White (Both)", "₹6"],
+                    ["Color Printing", "₹10"]
                 ]
             },
-            passphoto: {
-                title: "Passport Photos",
-                icon: '<i class="fas fa-id-card"></i>',
-                prices: [{ label: "Full Set (Instant)", price: "₹50" }]
+            photo: {
+                title: "Passport Photo",
+                icon: '<i class="fas fa-camera"></i>',
+                items: [["Full Set (Instant)", "₹50"]]
             },
             lamination: {
-                title: "Lamination",
-                icon: '<i class="fas fa-file-shield"></i>',
-                prices: [
-                    { label: "A4 Size", price: "₹20" },
-                    { label: "ID Card Size", price: "₹10" }
+                title: "Lamination Prices",
+                icon: '<i class="fas fa-shield-halved"></i>',
+                items: [
+                    ["A4 Size", "₹20"],
+                    ["ID Card Size", "₹10"]
                 ]
             },
             spiral: {
                 title: "Spiral Binding",
-                icon: '<i class="fas fa-book"></i>',
-                prices: [{ label: "Standard Binding", price: "₹50" }]
+                icon: '<i class="fas fa-file-lines"></i>',
+                items: [["Standard Binding", "₹50"]]
             },
             software: {
                 title: "Software Repair",
-                icon: '<i class="fas fa-laptop-code"></i>',
-                prices: [
-                    { label: "Starting from just ", price: "₹100" }                ]
+                icon: '<i class="fas fa-laptop-medical"></i>',
+                items: [
+                    ["Starting From", "₹200"]
+                ]
             }
         };
 
-        function openModal(serviceKey) {
-            const data = pricingData[serviceKey];
+        function showPrices(key) {
+            const data = priceData[key];
             document.getElementById('modalTitle').innerText = data.title;
             document.getElementById('modalIcon').innerHTML = data.icon;
-            const listContainer = document.getElementById('priceList');
-            listContainer.innerHTML = '';
-            data.prices.forEach(item => {
-                const li = document.createElement('li');
-                li.innerHTML = `<span>${item.label}</span> <span class="price-val">${item.price}</span>`;
-                listContainer.appendChild(li);
+            
+            let html = '';
+            data.items.forEach(item => {
+                html += `
+                <div class="price-item">
+                    <span class="price-label">${item[0]}</span>
+                    <span class="price-value">${item[1]}</span>
+                </div>`;
             });
-            document.getElementById('modalOverlay').style.display = 'flex';
+            
+            document.getElementById('modalPrices').innerHTML = html;
+            document.getElementById('priceModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Prevent scroll
         }
 
         function closeModal() {
-            document.getElementById('modalOverlay').style.display = 'none';
+            document.getElementById('priceModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('modalOverlay');
-            if (event.target == modal) { closeModal(); }
+        // Close on outside click
+        window.onclick = function(e) {
+            if(e.target == document.getElementById('priceModal')) closeModal();
         }
     </script>
 </body>
