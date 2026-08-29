@@ -122,6 +122,7 @@
         .service-card h3 { margin-bottom: 8px; color: var(--primary-navy); font-size: 1.2rem; }
         .price-hint { font-size: 0.75rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; }
 
+        /* Modal Styles */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -164,6 +165,7 @@
         }
         .price-val { font-weight: 700; color: var(--primary-navy); }
 
+        /* Contact Section */
         .contact-section { 
             background: var(--primary-navy); 
             color: var(--white); 
@@ -182,7 +184,10 @@
             font-weight: 700; 
             margin: 15px 0;
             cursor: pointer;
+            transition: opacity 0.2s;
         }
+
+        .phone-number:hover { opacity: 0.8; }
 
         .phone-number i {
             color: #25D366;
@@ -218,7 +223,7 @@
 
             <div class="service-card" onclick="openModal('passphoto')">
                 <i class="fas fa-id-card"></i>
-                <h3>Passphoto</h3>
+                <h3>Passport Photo</h3>
                 <span class="price-hint">View Price</span>
             </div>
 
@@ -246,8 +251,8 @@
                 <span class="price-hint">View Price</span>
             </div>
 
-            <!-- NEW SERVICE ADDED HERE -->
-            <div class="service-card" onclick="openModal('electronic_repair')">
+            <!-- ELECTRONIC REPAIR SERVICE -->
+            <div class="service-card" onclick="openModal('electronic')">
                 <i class="fas fa-microchip"></i>
                 <h3>Electronic Repair</h3>
                 <span class="price-hint">View Price</span>
@@ -265,10 +270,9 @@
         </div>
     </div>
 
-    <!-- UPDATED CONTACT SECTION -->
+    <!-- CONTACT SECTION -->
     <section class="contact-section">
         <h2 style="font-weight: 300;">Connect with Us</h2>
-        <!-- Added onclick function for direct connection -->
         <div class="phone-number" onclick="goToWhatsApp('6033541297')">
             <i class="fab fa-whatsapp"></i>6033541297
         </div>
@@ -276,19 +280,14 @@
     </section>
 
     <script>
-        // FUNCTION TO HANDLE DIRECT WHATSAPP ON ANY DEVICE
+        /**
+         * FUNCTION TO HANDLE DIRECT WHATSAPP
+         * Uses the universal wa.me format with country code '91'
+         */
         function goToWhatsApp(number) {
-            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-            let url;
-
-            if (isMobile) {
-                // Force opens the WhatsApp App on Mobile
-                url = "whatsapp://send?phone=" + number;
-            } else {
-                // Directly opens WhatsApp Web Chat on PC (skipping the middle landing page)
-                url = "https://web.whatsapp.com/send?phone=" + number;
-            }
-            
+            const countryCode = "91"; 
+            // This format works perfectly on PC (opens app/web) and Mobile (opens app)
+            const url = "https://wa.me/" + countryCode + number;
             window.open(url, '_blank');
         }
 
@@ -323,9 +322,10 @@
             screen: {
                 title: "Screen Protector",
                 icon: '<i class="fas fa-mobile-screen-button"></i>',
-                prices: [{ label: "All Models", price: "₹100" },
-                        { label: "Order Privacy", price: "₹300" }
-                        ]
+                prices: [
+                    { label: "All Models", price: "₹100" },
+                    { label: "Order Privacy", price: "₹300" }
+                ]
             },
             software: {
                 title: "Software Repair",
@@ -334,8 +334,7 @@
                     { label: "Starting from", price: "₹100" }
                 ]
             },
-            // NEW DATA ADDED HERE
-            electronic_repair: {
+            electronic: {
                 title: "Electronic Repair",
                 icon: '<i class="fas fa-microchip"></i>',
                 prices: [
@@ -350,22 +349,28 @@
             document.getElementById('modalIcon').innerHTML = data.icon;
             const listContainer = document.getElementById('priceList');
             listContainer.innerHTML = '';
+            
             data.prices.forEach(item => {
                 const li = document.createElement('li');
                 li.innerHTML = `<span>${item.label}</span> <span class="price-val">${item.price}</span>`;
                 listContainer.appendChild(li);
             });
+            
             document.getElementById('modalOverlay').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; 
+            document.body.style.overflow = 'hidden'; // Stop scrolling background
         }
 
         function closeModal() {
             document.getElementById('modalOverlay').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = 'auto'; // Restore scrolling
         }
 
+        // Close modal if clicking outside the white box
         window.onclick = function(event) {
-            if (event.target == document.getElementById('modalOverlay')) { closeModal(); }
+            const modal = document.getElementById('modalOverlay');
+            if (event.target == modal) { 
+                closeModal(); 
+            }
         }
     </script>
 </body>
