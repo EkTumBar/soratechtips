@@ -181,6 +181,7 @@
             justify-content: center;
             font-weight: 700; 
             margin: 15px 0;
+            cursor: pointer;
         }
 
         .phone-number i {
@@ -257,15 +258,33 @@
         </div>
     </div>
 
+    <!-- UPDATED CONTACT SECTION -->
     <section class="contact-section">
         <h2 style="font-weight: 300;">Connect with Us</h2>
-        <a href="whatsapp://send?phone=6033541297" class="phone-number">
-    <i class="fab fa-whatsapp"></i>6033541297
-</a>
-        <p style="opacity: 0.7; font-size: 0.85rem;">Click to chat on WhatsApp!<br>Thank You for Choosing SoraTechTips!</p>
+        <!-- Added onclick function for direct connection -->
+        <div class="phone-number" onclick="goToWhatsApp('6033541297')">
+            <i class="fab fa-whatsapp"></i>6033541297
+        </div>
+        <p style="opacity: 0.7; font-size: 0.85rem;">Click the number to chat instantly!<br>Thank You for Choosing SoraTechTips!</p>
     </section>
 
     <script>
+        // FUNCTION TO HANDLE DIRECT WHATSAPP ON ANY DEVICE
+        function goToWhatsApp(number) {
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            let url;
+
+            if (isMobile) {
+                // Force opens the WhatsApp App on Mobile
+                url = "whatsapp://send?phone=" + number;
+            } else {
+                // Directly opens WhatsApp Web Chat on PC (skipping the middle landing page)
+                url = "https://web.whatsapp.com/send?phone=" + number;
+            }
+            
+            window.open(url, '_blank');
+        }
+
         const pricingData = {
             printing: {
                 title: "Printing",
