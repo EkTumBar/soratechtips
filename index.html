@@ -17,12 +17,11 @@
             --text-dark: #333;
         }
 
-        /* HARD RESET TO FIX WHITE LINE/OVERFLOW */
         html, body {
             margin: 0;
             padding: 0;
             width: 100%;
-            overflow-x: hidden; /* This kills the vertical white line on the right */
+            overflow-x: hidden;
             position: relative;
         }
 
@@ -38,7 +37,6 @@
             -webkit-text-size-adjust: 100%;
         }
 
-        /* --- Header Section --- */
         header {
             background: linear-gradient(135deg, var(--primary-navy) 0%, #162a4d 100%);
             color: var(--white);
@@ -49,12 +47,11 @@
         }
 
         .logo-text {
-            /* Adjusted font-scaling to prevent cutting off "Tips" */
             font-size: clamp(1.8rem, 9vw, 3.5rem); 
             font-weight: 700;
             margin-bottom: 10px;
             line-height: 1.2;
-            word-wrap: break-word; /* Ensures it stays inside on tiny screens */
+            word-wrap: break-word;
             display: block;
         }
 
@@ -73,7 +70,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- Services Section --- */
         .services-container {
             width: 100%;
             max-width: 1100px;
@@ -102,7 +98,6 @@
 
         .services-grid {
             display: grid;
-            /* Reduced minmax to 250px to fit better on small phones */
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
@@ -127,7 +122,6 @@
         .service-card h3 { margin-bottom: 8px; color: var(--primary-navy); font-size: 1.2rem; }
         .price-hint { font-size: 0.75rem; color: var(--accent-gold); font-weight: 700; text-transform: uppercase; }
 
-        /* --- Modal Responsive Logic --- */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -170,7 +164,6 @@
         }
         .price-val { font-weight: 700; color: var(--primary-navy); }
 
-        /* --- Footer --- */
         .contact-section { 
             background: var(--primary-navy); 
             color: var(--white); 
@@ -183,12 +176,18 @@
             font-size: clamp(1.8rem, 10vw, 2.8rem); 
             color: var(--accent-gold); 
             text-decoration: none; 
-            display: block; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
             font-weight: 700; 
             margin: 15px 0;
         }
 
-        /* Fix for very narrow phones like iPhone SE */
+        .phone-number i {
+            color: #25D366;
+            margin-right: 15px;
+        }
+
         @media (max-width: 350px) {
             .services-grid { grid-template-columns: 1fr; }
             .logo-text { font-size: 1.7rem; }
@@ -259,9 +258,11 @@
     </div>
 
     <section class="contact-section">
-        <h2 style="font-weight: 300;">For More Info Contact Us</h2>
-        <a href="tel:6033541297" class="phone-number">6033541297</a>
-        <p style="opacity: 0.7; font-size: 0.85rem;">Thank You for Choosing SoraTechTips!</p>
+        <h2 style="font-weight: 300;">Connect with Us</h2>
+        <a href="https://wa.me/6033541297" class="phone-number" target="_blank">
+            <i class="fab fa-whatsapp"></i>6033541297
+        </a>
+        <p style="opacity: 0.7; font-size: 0.85rem;">Click to chat on WhatsApp!<br>Thank You for Choosing SoraTechTips!</p>
     </section>
 
     <script>
