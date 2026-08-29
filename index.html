@@ -268,6 +268,7 @@
     <!-- UPDATED CONTACT SECTION -->
     <section class="contact-section">
         <h2 style="font-weight: 300;">Connect with Us</h2>
+        <!-- Added onclick function for direct connection -->
         <div class="phone-number" onclick="goToWhatsApp('6033541297')">
             <i class="fab fa-whatsapp"></i>6033541297
         </div>
@@ -275,14 +276,19 @@
     </section>
 
     <script>
+        // FUNCTION TO HANDLE DIRECT WHATSAPP ON ANY DEVICE
         function goToWhatsApp(number) {
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             let url;
+
             if (isMobile) {
+                // Force opens the WhatsApp App on Mobile
                 url = "whatsapp://send?phone=" + number;
             } else {
+                // Directly opens WhatsApp Web Chat on PC (skipping the middle landing page)
                 url = "https://web.whatsapp.com/send?phone=" + number;
             }
+            
             window.open(url, '_blank');
         }
 
